@@ -184,7 +184,7 @@
         <div class="sb-sec">
             <div class="sb-sec-lbl">Akun</div>
             <a href="{{ route('owner.akun.index') }}" class="nav-link-a {{ request()->routeIs('owner.akun.*') ? 'active' : '' }}">
-                <i data-lucide="user" class="nav-icon"></i> Profil Saya
+                <i data-lucide="user" class="nav-icon"></i> Akun
             </a>
         </div>
     </nav>

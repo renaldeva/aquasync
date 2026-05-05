@@ -47,33 +47,6 @@
     </div>
 
     <div class="col-12 col-lg-6">
-        {{-- Ganti Password --}}
-        <div class="card-a mb-3">
-            <div class="card-hd"><div class="card-ttl">Ganti Password</div></div>
-            <form action="{{ route('admin.akun.password') }}" method="POST">
-                @csrf @method('PATCH')
-                <div class="row g-3">
-                    <div class="col-12">
-                        <label class="flbl">Password Saat Ini *</label>
-                        <input type="password" name="current_password" class="finp" required placeholder="••••••••">
-                    </div>
-                    <div class="col-12">
-                        <label class="flbl">Password Baru *</label>
-                        <input type="password" name="password" class="finp" required placeholder="Min. 8 karakter">
-                    </div>
-                    <div class="col-12">
-                        <label class="flbl">Konfirmasi Password Baru *</label>
-                        <input type="password" name="password_confirmation" class="finp" required placeholder="Ulangi password baru">
-                    </div>
-                    <div class="col-12">
-                        <button type="submit" class="btn-p">
-                            <i data-lucide="lock" style="width:15px;height:15px"></i> Ganti Password
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
         {{-- Info Sistem --}}
         <div class="card-a">
             <div class="card-hd"><div class="card-ttl">Informasi Sistem</div></div>
