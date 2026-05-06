@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Laporan;
 use App\Services\LaporanService;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
  
 class LaporanController extends Controller
 {
@@ -36,10 +37,8 @@ class LaporanController extends Controller
  
     public function download(Laporan $laporan)
     {
-        // Implementasi dengan barryvdh/laravel-dompdf
-        // $pdf = \PDF::loadView('admin.laporan.pdf', compact('laporan'));
-        // return $pdf->download(Str::slug($laporan->judul) . '.pdf');
-        return redirect()->route('admin.laporan.show', $laporan)
-            ->with('error', 'Fitur download PDF sedang dalam pengembangan.');
+        $laporan->load('kolam','pembuat');
+        $pdf = Pdf::loadView('admin.laporan.pdf', compact('laporan'));
+        return $pdf->download('laporan-'.$laporan->id.'.pdf');
     }
 }

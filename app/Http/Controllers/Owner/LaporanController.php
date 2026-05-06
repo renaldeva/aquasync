@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Owner;
  
 use App\Http\Controllers\Controller;
 use App\Models\Laporan;
+use Barryvdh\DomPDF\Facade\Pdf;
  
 class LaporanController extends Controller
 {
@@ -24,7 +25,8 @@ class LaporanController extends Controller
     public function download(Laporan $laporan)
     {
         abort_if(!in_array($laporan->status, ['published','approved']), 403);
-        return redirect()->route('owner.laporan.show', $laporan)
-            ->with('error', 'Fitur download PDF sedang dalam pengembangan.');
+        $laporan->load('kolam','pembuat');
+        $pdf = Pdf::loadView('owner.laporan.pdf', compact('laporan'));
+        return $pdf->download('laporan-'.$laporan->id.'.pdf');
     }
 }
