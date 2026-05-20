@@ -13,7 +13,7 @@ class KolamController extends Controller
  
     public function index()
     {
-        $kolam = Kolam::with('latestKualitasAir', 'iotDevices')
+        $kolam = Kolam::with('latestKualitasAir', 'iotDevice')
         ->latest()
         ->paginate(15);
         return view('admin.kolam.index', compact('kolam'));
