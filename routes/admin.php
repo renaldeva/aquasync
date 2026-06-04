@@ -44,6 +44,7 @@ Route::prefix('admin')
         Route::patch('/jadwal-pakan/{jadwal}',         [JadwalPakanController::class, 'update']) ->name('jadwal-pakan.update');
         Route::delete('/jadwal-pakan/{jadwal}',        [JadwalPakanController::class, 'destroy'])->name('jadwal-pakan.destroy');
         Route::post('/jadwal-pakan/{jadwal}/execute',  [JadwalPakanController::class, 'execute'])->name('jadwal-pakan.execute');
+        Route::post('/jadwal-pakan/manual-feed',       [JadwalPakanController::class, 'manualFeed'])->name('jadwal-pakan.manual-feed');
 
         // Pengurasan Air
         Route::get('/pengurasan',                [PengurasanController::class, 'index'])  ->name('pengurasan.index');

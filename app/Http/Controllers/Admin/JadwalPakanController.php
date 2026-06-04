@@ -114,6 +114,25 @@ class JadwalPakanController extends Controller
             ->with('success', 'Jadwal berhasil dinonaktifkan.');
     }
 
+    public function manualFeed()
+    {
+    $deviceId = 'ESP32-KLM002';
+
+    $ok = $this->mqtt->publishPakanCommand(
+        $deviceId,
+        'ON',
+        100,
+        0
+    );
+
+    return back()->with(
+        $ok ? 'success' : 'error',
+        $ok
+            ? 'Perintah pakan berhasil dikirim.'
+            : 'Gagal mengirim MQTT.'
+    );
+    }
+
     /*
     |--------------------------------------------------------------------------
     | EXECUTE MQTT
@@ -168,26 +187,11 @@ class JadwalPakanController extends Controller
             | PAYLOAD MQTT
             |--------------------------------------------------------------------------
             */
-            $payload = [
-                'status'        => 'ON',
-                'jadwal_id'     => $jadwal->id,
-                'nama_jadwal'   => $jadwal->nama_jadwal,
-                'jumlah_pakan'  => $jadwal->jumlah_pakan,
-                'satuan'        => $jadwal->satuan,
-                'jenis_pakan'   => $jadwal->jenis_pakan,
-                'waktu_pakan'   => $jadwal->waktu_pakan,
-                'timestamp'     => now()->toDateTimeString(),
-            ];
-
-            /*
-            |--------------------------------------------------------------------------
-            | KIRIM MQTT
-            |--------------------------------------------------------------------------
-            */
-            $ok = $this->mqtt->publish(
+            $ok = $this->mqtt->publishPakanCommand(
                 $deviceId,
-                'pakan',
-                $payload
+                'ON',
+                $jadwal->jumlah_pakan,
+                $jadwal->id
             );
 
             /*

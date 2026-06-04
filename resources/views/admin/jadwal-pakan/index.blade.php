@@ -5,9 +5,21 @@
 @section('content')
 <div class="ph d-flex align-items-start justify-content-between">
     <div><h1>Jadwal Pakan</h1><p>Atur jadwal pemberian pakan otomatis via IoT</p></div>
-    <button class="btn-p" data-bs-toggle="modal" data-bs-target="#mTambah">
-        <i data-lucide="plus" style="width:15px;height:15px"></i> Tambah Jadwal
-    </button>
+    <div style="display:flex;gap:10px">
+        <form action="{{ route('admin.jadwal-pakan.manual-feed') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn-s"
+                onclick="return confirm('Jalankan pemberian pakan sekarang?')">
+                <i data-lucide="play-circle" style="width:15px;height:15px"></i>
+                Kasih Pakan
+            </button>
+        </form>
+    
+        <button class="btn-p" data-bs-toggle="modal" data-bs-target="#mTambah">
+            <i data-lucide="plus" style="width:15px;height:15px"></i>
+            Tambah Jadwal
+        </button>
+    </div>
 </div>
 
 <div class="card-a">

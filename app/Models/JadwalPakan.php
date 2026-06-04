@@ -7,8 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 class JadwalPakan extends Model
 {
     protected $table    = 'jadwal_pakan';
-    protected $fillable = ['kolam_id','nama_jadwal','waktu_pakan','jumlah_pakan','satuan','jenis_pakan','frekuensi','hari_aktif','status','flag_status','created_by'];
-    protected $casts    = ['hari_aktif' => 'array'];
+    protected $fillable = [
+        'kolam_id',
+        'nama_jadwal',
+        'waktu_pakan',
+        'jumlah_pakan',
+        'satuan',
+        'jenis_pakan',
+        'frekuensi',
+        'hari_aktif',
+        'status',
+        'flag_status',
+        'created_by',
+        'last_executed_at'
+    ];
+    protected $casts = [
+        'hari_aktif' => 'array',
+        'last_executed_at' => 'datetime'
+    ];
  
     public function kolam()   { return $this->belongsTo(Kolam::class); }
     public function creator() { return $this->belongsTo(User::class, 'created_by'); }
