@@ -19,13 +19,23 @@ class PengurasanController extends Controller
  
     public function start(Kolam $kolam)
     {
-        $ok = $this->mqtt->publishPengurasanCommand($kolam->id, 'start');
-        return back()->with($ok ? 'success' : 'error', $ok ? 'Pengurasan dimulai.' : 'Gagal kirim perintah.');
+
+    $ok = $this->mqtt->publishPengurasanCommand($kolam->id, 'start');
+
+    return back()->with(
+        $ok ? 'success' : 'error',
+        $ok ? 'Pengurasan dimulai.' : 'Gagal kirim perintah.'
+        );
     }
- 
+
     public function stop(Kolam $kolam)
     {
+
         $ok = $this->mqtt->publishPengurasanCommand($kolam->id, 'stop');
-        return back()->with($ok ? 'success' : 'error', $ok ? 'Pengurasan dihentikan.' : 'Gagal kirim perintah.');
+
+        return back()->with(
+            $ok ? 'success' : 'error',
+            $ok ? 'Pengurasan dihentikan.' : 'Gagal kirim perintah.'
+        );
     }
 }

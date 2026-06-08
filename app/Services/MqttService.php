@@ -501,6 +501,7 @@ class MqttService
     */
     public function publish(string $deviceId, string $type, array $payload): bool
     {
+        
         try {
             if (!$this->connect()) {
                 return false;
@@ -575,5 +576,20 @@ class MqttService
                 'time'   => now()->toDateTimeString(),
             ]
         );
+    }
+
+    public function publishPengurasanCommand(int $kolamId, string $action = 'start'): bool
+    {
+    $device = IotDevice::where('kolam_id', $kolamId)->first();
+
+    if (!$device) {
+        Log::error("Device untuk kolam {$kolamId} tidak ditemukan");
+        return false;
+    }
+
+    return $this->publishKurasCommand(
+        $device->device_id,
+        $action
+    );
     }
 }
