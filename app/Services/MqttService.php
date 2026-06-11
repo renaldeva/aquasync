@@ -315,9 +315,10 @@ class MqttService
                 IotDevice::create([
                     'device_id'        => $deviceId,
                     'nama_device'      => 'ESP32 ' . $deviceId,
-                    'last_ping'        => now(),
+                    'tipe'             => 'esp32',
                     'status'           => 'online',
-                    'ip_address'       => $data['ip']       ?? null,
+                    'last_ping'        => now(),
+                    'ip_address'       => $data['ip'] ?? null,
                     'firmware_version' => $data['firmware'] ?? null,
                 ]);
                 Log::info("Device baru terdaftar: {$deviceId}");
