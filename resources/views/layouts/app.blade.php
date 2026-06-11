@@ -28,8 +28,8 @@
                 navigator.serviceWorker.register('/sw.js');
             });
         }
-        </script>
-        
+    </script>
+
     <style>
         :root {
             --sidebar-bg:     #0f2942;
