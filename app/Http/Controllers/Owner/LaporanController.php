@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Owner;
  
 use App\Http\Controllers\Controller;
 use App\Models\Laporan;
+use App\Models\KualitasAir;
+use App\Models\JadwalPakan;
 use Barryvdh\DomPDF\Facade\Pdf;
  
 class LaporanController extends Controller
@@ -24,9 +26,21 @@ class LaporanController extends Controller
  
     public function download(Laporan $laporan)
     {
-        abort_if(!in_array($laporan->status, ['published','approved']), 403);
-        $laporan->load('kolam','pembuat');
-        $pdf = Pdf::loadView('owner.laporan.pdf', compact('laporan'));
-        return $pdf->download('laporan-'.$laporan->id.'.pdf');
-    }
+    abort_if(
+        !in_array($laporan->status, ['published', 'approved']),
+        403,
+        'Laporan belum tersedia.'
+    );
+
+    $laporan->load('kolam', 'pembuat');
+
+    $pdf = Pdf::loadView(
+        'admin.laporan.pdf',
+        compact('laporan')
+    );
+
+    return $pdf->download(
+        'laporan-'.$laporan->id.'.pdf'
+    );
+    }   
 }
