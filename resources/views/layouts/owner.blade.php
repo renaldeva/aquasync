@@ -147,11 +147,62 @@
     .mono{font-family:'DM Mono',monospace}
     .live-dot{display:inline-block;width:7px;height:7px;background:var(--success);border-radius:50%;margin-right:5px;animation:lp 1.8s ease-in-out infinite}
     @keyframes lp{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+    .mobile-menu-btn{
+    display:none;
+    width:40px;
+    height:40px;
+    border:none;
+    border-radius:10px;
+    background:var(--body-bg);
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+
+.sidebar-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.4);
+    opacity:0;
+    visibility:hidden;
+    transition:.3s;
+    z-index:90;
+}
+
+.sidebar-overlay.show{
+    opacity:1;
+    visibility:visible;
+}
+
+@media (max-width:768px){
+
+    .mobile-menu-btn{
+        display:flex;
+    }
+
+    .topbar{
+        gap:12px;
+    }
+
+    .sb{
+        z-index:100;
+        transform:translateX(-100%);
+        transition:.3s;
+    }
+
+    .sb.show{
+        transform:translateX(0);
+    }
+
+    .topbar-title{
+        flex:1;
+    }
+}
     </style>
     @stack('styles')
 </head>
 <body>
-
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <aside class="sb">
     <div class="sb-brand">
         <div class="sb-brand-name">〜 AquaSync</div>
@@ -216,6 +267,9 @@
 
 <div class="main-wrap">
     <header class="topbar">
+        <button class="mobile-menu-btn" id="menuToggle">
+            <i data-lucide="menu"></i>
+        </button>
         <span class="topbar-title">@yield('page-title','Dashboard')</span>
         <div class="topbar-right">
             <a href="{{ route('owner.notifikasi.index') }}" class="btn-icon">
@@ -260,5 +314,26 @@ lucide.createIcons();
 setTimeout(()=>{const t=document.getElementById('tw');if(t){t.style.opacity='0';t.style.transition='opacity .4s';setTimeout(()=>t.remove(),400)}},4000);
 </script>
 @stack('scripts')
+<script>
+
+    const sidebar = document.querySelector('.sb');
+    const toggleBtn = document.getElementById('menuToggle');
+    const overlay = document.getElementById('sidebarOverlay');
+    
+    if(toggleBtn){
+    
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('show');
+            overlay.classList.toggle('show');
+        });
+    
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('show');
+            overlay.classList.remove('show');
+        });
+    
+    }
+    
+    </script>
 </body>
 </html>

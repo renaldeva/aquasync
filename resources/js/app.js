@@ -46,7 +46,7 @@ async function initFirebase() {
 
     if (token) {
 
-        await fetch('/save-fcm-token', {
+        await fetch('/fcm/token', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
