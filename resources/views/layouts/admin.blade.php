@@ -19,6 +19,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+    @vite(['resources/js/app.js'])
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -254,7 +255,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-@vite(['resources/js/app.js'])
+
 <script>
 lucide.createIcons();
 setTimeout(()=>{const t=document.getElementById('tw');if(t){t.style.opacity='0';t.style.transition='opacity .4s';setTimeout(()=>t.remove(),400)}},4000);

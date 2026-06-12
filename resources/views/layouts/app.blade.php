@@ -28,6 +28,8 @@
     {{-- Chart.js --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
 
+    @vite(['resources/js/app.js'])
+
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -671,7 +673,7 @@
 
 {{-- Scripts --}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-@vite(['resources/js/app.js'])
+
 <script>
     // Init Lucide icons
     lucide.createIcons();
