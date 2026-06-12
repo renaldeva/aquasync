@@ -1,3 +1,4 @@
+console.log('APP JS LOADED');
 import './bootstrap';
 
 import Alpine from 'alpinejs';
